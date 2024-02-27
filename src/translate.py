@@ -2,6 +2,7 @@ import pandas as pd
 import transformers
 import json
 import os
+import time
 
 
 """define functions"""
@@ -108,16 +109,42 @@ def translate_xcsr(tgt_lang, english_data, path = './data/raw/', print_update = 
 
   return translated_data
 
+def save_translated_data(translated_data, tgt_lang, path = './data/processed/'):
+  # Serializing json
+  json_object = json.dumps(translated_data, indent=4)
+
+  # Writing to results_sw.json
+  with open(path + tgt_lang + '_dev.json', "w") as outfile:
+      outfile.write(json_object)
+
+  print('Saved data for ' + tgt_lang + '.')
+
 if __name__ == '__main__':
   
-    """load data"""
+    # load data
     with open('./data/raw/dev.jsonl') as f:
         en = [json.loads(line) for line in f] # work around needed as dataset is in jsonl format
 
     print('Data loaded with length ' + str(len(en)))
 
+    # load model
+    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
-    # fill in the blanks
+    #model = 'facebook/nllb-200-distilled-600M'
+    model = 'facebook/nllb-200-3.3B' # from https://huggingface.co/facebook/nllb-200-3.3B
+
+    tokenizer = AutoTokenizer.from_pretrained(model)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model)
+
+    print("Model loaded!")
+
+    # define target translation languages
+    tgt_langs = ['kik', 'bho', 'luo']
+
+    # translate data
+    for tgt_lang in tgt_langs:
+       translated_data = translate_xcsr(tgt_lang, en, path = './data/raw/', print_update = True)
+       save_translated_data(translated_data, tgt_lang, path = './data/processed/')
 
 
     print("done!")
