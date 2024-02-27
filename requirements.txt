@@ -1,4 +1,1 @@
 transformers
-datasets
-accelerate
-git-lfs
