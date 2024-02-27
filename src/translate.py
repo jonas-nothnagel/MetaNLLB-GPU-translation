@@ -127,7 +127,7 @@ def save_translated_data(translated_data, tgt_lang, path = './data/processed/'):
 if __name__ == '__main__':
   
     # load data
-    with open('./data/raw/test.jsonl') as f:
+    with open('./data/raw/dev_copy.jsonl') as f:
         en = [json.loads(line) for line in f] # work around needed as dataset is in jsonl format
 
     print('Data loaded with length ' + str(len(en)))
@@ -135,8 +135,8 @@ if __name__ == '__main__':
     # load model
     from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
-    #model = 'facebook/nllb-200-distilled-600M'
-    model = 'facebook/nllb-200-3.3B' # from https://huggingface.co/facebook/nllb-200-3.3B
+    model = 'facebook/nllb-200-distilled-600M'
+    #model = 'facebook/nllb-200-3.3B' # from https://huggingface.co/facebook/nllb-200-3.3B
 
     tokenizer = AutoTokenizer.from_pretrained(model)
     model = AutoModelForSeq2SeqLM.from_pretrained(model)
