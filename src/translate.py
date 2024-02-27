@@ -127,7 +127,7 @@ def save_translated_data(translated_data, tgt_lang, path = './data/processed/'):
 if __name__ == '__main__':
   
     # load data
-    with open('./data/raw/dev.jsonl') as f:
+    with open('./data/raw/test.jsonl') as f:
         en = [json.loads(line) for line in f] # work around needed as dataset is in jsonl format
 
     print('Data loaded with length ' + str(len(en)))
