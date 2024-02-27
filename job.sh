@@ -9,5 +9,5 @@ apt-get update
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 apt-get install git-lfs
 git lfs install
-# run training script
-python ./src/translate.py
+# run training script unbuffered
+python -u ./src/translate.py 
