@@ -3,7 +3,11 @@ import transformers
 import json
 import os
 import time
+import torch
 
+
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+print(f'running on device: {device}')
 
 """define functions"""
 def translate_xcsr(tgt_lang, english_data, path = './data/raw/', print_update = True):
@@ -26,22 +30,23 @@ def translate_xcsr(tgt_lang, english_data, path = './data/raw/', print_update = 
 
   #Set up pipelines
 
+
   print('Setting up ' + tgt_lang + ' translator...')
   if tgt_lang == 'swh':
     # Swahili translator
-    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='swh_Latn', max_length = 200)
+    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='swh_Latn', max_length = 200, device=device)
   elif tgt_lang == 'kik':
     # Kikuyu translator
-    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='kik_Latn', max_length = 200)
+    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='kik_Latn', max_length = 200, device=device)
   elif tgt_lang == 'luo':
     # Luo translator
-    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='luo_Latn', max_length = 200)
+    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='luo_Latn', max_length = 200, device=device)
   elif tgt_lang == 'hin':
     # Hindi translator
-    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='hin_Deva', max_length = 200)
+    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='hin_Deva', max_length = 200, device=device)
   elif tgt_lang == 'bho':
     #Bhojpuri translator
-    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='bho_Deva', max_length = 200)
+    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang='eng_Latn', tgt_lang='bho_Deva', max_length = 200, device=device)
   else:
     print('Translator has not set up, please add it to the function. And improve the function...')
     return
