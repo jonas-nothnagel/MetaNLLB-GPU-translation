@@ -1,0 +1,31 @@
+[
+    {
+        "id": "95b2fec4a492244a",
+        "lang": "en",
+        "question": {
+            "stem": "The people wanted to stop the parade, so what did they set up to thwart it?",
+            "choices": [
+                {
+                    "label": "A",
+                    "text": "carnival"
+                },
+                {
+                    "label": "B",
+                    "text": "public place"
+                },
+                {
+                    "label": "C",
+                    "text": "apartment"
+                },
+                {
+                    "label": "D",
+                    "text": "roadblock"
+                },
+                {
+                    "label": "E",
+                    "text": "space shuttle"
+                }
+            ]
+        }
+    }
+]
